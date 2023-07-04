@@ -51,31 +51,29 @@
 								<tr>
 									<th scope="col">Producto</th>
 									<th scope="col">Precio</th>
-									<th scope="col">Cantidad</th>
 									<th scope="col">Total</th>
 									<th scope="col">Acción</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="dorden:${cart}">
-									<td th:text="${dorden.nombre}"></td>
-									<td th:text="${dorden.precio}"></td>
-									<td th:text="${dorden.cantidad}"></td>
-									<td th:text="${dorden.total}"></td>
-									<td><a th:href="@{/delete/cart/{id}   (id=${dorden.producto.id}) }" class="btn btn-danger">Quitar</a></td>
+								<tr th:each="producto:${cart}">
+									<td th:text="${producto.nombre}"></td>
+									<td th:text="${producto.precio}"></td>
+									<td th:text="${producto.total}"></td>
+									<td><a th:href="@{/delete/wishlist/{id}   (id=${listaDeseo.producto.id}) }" class="btn btn-danger">Quitar</a></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 
-					<div class="col-lg-3">
+					<!--<div class="col-lg-3">
 						<h2 class="card-title">SUBTOTAL</h2>
 
 						<ul class="list-group">
 							<li class="list-group-item"><h5 th:text="${orden.total}"></h5></li>
 							<a th:href="@{/order}" class="btn btn-dark">Ver Orden</a>
 						</ul>
-					</div>
+					</div>-->
 
 
 				</div>

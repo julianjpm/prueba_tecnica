@@ -35,7 +35,7 @@ private final Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
 	
 	@GetMapping("")
 	public String show(Model model) {
-		//model.addAttribute("productos", productoService.findAll());
+		model.addAttribute("productos", productoService.findAll());
 		return "productos/show";
 	}
 	
