@@ -1,5 +1,7 @@
 package com.ecommerce.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -28,6 +30,9 @@ public class HomeController {
 	
 	@Autowired
 	private ProductoService productoService;
+	
+	// para almacenar los detalles de la orden
+	List<Favoritos> listaDeseo = new ArrayList<Favoritos>();
 	
 	@GetMapping("")
 	public String home(Model model) {
@@ -58,25 +63,27 @@ public class HomeController {
 	public String addWishList(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
 		Favoritos listaDeseo = new Favoritos();
 		Producto producto = new Producto();
+		Usuario usuario = new Usuario();
 
 		Optional<Producto> optionalProducto = productoService.get(id);
+		log.info("Producto id: {}", id);
 		log.info("Producto añadido: {}", optionalProducto.get());
 		log.info("Cantidad: {}", cantidad);
-		producto = optionalProducto.get();
+		/*producto = optionalProducto.get();
 
 		producto.setCantidad(cantidad);
 		producto.setPrecio(producto.getPrecio());
 		producto.setNombre(producto.getNombre());
 		listaDeseo.setProducto(producto);
-		Usuario usuario = null;
 		listaDeseo.setUsuario(usuario);
 		
 		//validar que le producto no se añada 2 veces
-		Integer idProducto=producto.getId();
-		/*boolean ingresado=detalles.stream().anyMatch(p -> p.getProducto().getId()==idProducto);
+		Integer idUsuario = usuario.getId();
+		Integer idProducto = producto.getId();
+		/*boolean ingresado = listaDeseo.stream().anyMatch(p -> p.getProducto().getId()==idProducto);
 		
 		if (!ingresado) {
-			detalles.add(listaDeseo);
+			listaDeseo.add(listaDeseo);
 		}
 		
 		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
